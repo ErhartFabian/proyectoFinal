@@ -1,15 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{Fragment} from 'react';
 import { BrowserRouter as Router, Route,Switch,Link,NavLink } from "react-router-dom";
 import {Home,Inventory,PaymentProcess} from './components'
-import { Fragment } from 'react/cjs/react.production.min';
+
 
 function App() {
   return (
     <Fragment>
 
       <Router>
-
+        <Route path="/home" component={Home}></Route>
       </Router>
     </Fragment>
   );
