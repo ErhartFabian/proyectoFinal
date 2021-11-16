@@ -1,16 +1,25 @@
 import './App.css';
 import React,{Fragment} from 'react';
-import { BrowserRouter as Router, Route,Switch,Link,NavLink } from "react-router-dom";
 import {Home,Inventory,PaymentProcess} from './components'
+import { BrowserRouter as 
+  Router, 
+  Route,
+  Switch,
+  Link,
+  NavLink } from "react-router-dom";
 
 
 function App() {
+
+
   return (
     <Fragment>
 
       <Router>
-        <Route path="/home" component={Home}></Route>
+        {/* ruta a home */}
+        <Route exact path="/" component={Home} />
       </Router>
+
     </Fragment>
   );
 }
