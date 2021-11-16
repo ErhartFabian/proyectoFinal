@@ -14,15 +14,28 @@ function App() {
 
   return (
     <Fragment>
-
+     
       <Router>
-        {/* ruta a home */}
-        <Route path="/home" component={Home} />
-        {/* ruta a  Inventory*/}
-        <Route path="/inventory" component={Inventory} />
-        {/* ruta para paymenprocess */}
-        <Route path="/paymentprocess" component={PaymentProcess} />
+         <Switch>
+          {/* ruta a home */}
+          <Route path="/home" component={Home} />
+          {/* ruta a  Inventory*/}
+          <Route path="/inventory" component={Inventory} />
+          {/* ruta para paymenprocess */}
+          <Route path="/paymentprocess" component={PaymentProcess} />
+          
+          <Route path="/" exact component={Home}></Route>
 
+          <Route path="/" render={()=>{
+            return(
+              <div className="component" style={{fontSize:"100px",display:'flex',justifyContent:"center"}} >
+
+                <h1>404 NOT FOUND</h1>
+              </div>
+            )
+          }
+          }></Route>
+        </Switch>
       </Router>
 
     </Fragment>
