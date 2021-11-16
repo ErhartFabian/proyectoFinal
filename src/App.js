@@ -17,7 +17,12 @@ function App() {
 
       <Router>
         {/* ruta a home */}
-        <Route exact path="/" component={Home} />
+        <Route path="/home" component={Home} />
+        {/* ruta a  Inventory*/}
+        <Route path="/inventory" component={Inventory} />
+        {/* ruta para paymenprocess */}
+        <Route path="/paymentprocess" component={PaymentProcess} />
+
       </Router>
 
     </Fragment>
