@@ -1,0 +1,16 @@
+#topnav{
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items: center;
+    background-color: #20203f;
+}
+
+#compName{
+    color:aliceblue;
+}
+
+#cartIcon{
+    height: 45px;
+    width: 45px;
+}
