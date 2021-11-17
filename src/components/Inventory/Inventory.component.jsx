@@ -5,24 +5,41 @@ import axios from 'axios';
 
 function Inventory() {
 
+    //Estado que contiene un arreglo con los nombres de los articulos 
     const [artTitle, setArtTitle] = useState([]);
-    const [artImg, setArtImg]= useState([]);
+    //Estado que contiene un arreglo con las urls (de imagenes) de los articulos 
+    const [artImg, setArtImg] = useState([]);
+    //Estado que contiene un arreglo con los precios de los articulos 
+    const [artPrice, setArtPrice] = useState([]);
 
+    //función para generar la tabla con los articulos
     function getArticles() {
 
+        //Solicita 12 articulos a través de la API
         axios.get('https://fakestoreapi.com/products?limit=12').then(response => {
-            console.log(response);
-            let newArtsT = [];
-            let newImgs=[];
 
+            //Arreglo auxiliar para guardar los nombres de los articulos
+            let newArtsT = [];
+
+            //Arreglo auxiliar para guardar las imagenes de los articulos
+            let newImgs = [];
+
+            //Arreglo auxiliar para guardar los precios de los articulos
+            let newPrices = [];
+
+            //Ciclo para guardar los datos en cada arreglo
             for (let i = 0; i < 12; i++) {
+
                 newArtsT.push(response.data[i].title);
                 newImgs.push(response.data[i].image);
+                newPrices.push(response.data[i].price);
+
             }
+            //Pasa los datos a los estados de los arreglos
             setArtTitle(newArtsT);
             setArtImg(newImgs);
-            console.log(newArtsT);
-            console.log(newImgs);
+            setArtPrice(newPrices);
+
         }
 
         ).catch(() => {
@@ -30,6 +47,7 @@ function Inventory() {
         })
     }
 
+    //Se llamarán los articulos cada que se reinicie la pagina
     useEffect(() => {
         getArticles();
     }, []);
@@ -48,9 +66,12 @@ function Inventory() {
 
             </div>
 
-            <ul style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap"}}>
+            <ul style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap" }}>
+                
 
                 {artTitle.map((article, articleImg) => {
+                    const images = artImg[articleImg];
+
                     return (
 
                         <div className="App" key={article}>
@@ -63,10 +84,23 @@ function Inventory() {
                                     name={article}
                                     style={{
                                         width: '400px',
-                                        height: '100px',
+                                        height: '500px',
                                     }}>
-                                    {articleImg}
-                                    
+
+                                    <img
+                                        className="imagesDisplay"
+                                        key={articleImg}
+                                        name={article}
+                                        alt={article}
+                                        src={images}
+                                        style={{
+                                            width: '150px',
+                                            height: '150px',
+                                        }}
+                                    />
+                                    <p>{article}</p>
+                                    <p>{"$" +artPrice[articleImg]}</p>
+                
                                 </button>
 
                             </div>
