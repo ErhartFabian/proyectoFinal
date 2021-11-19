@@ -8,10 +8,10 @@ import Checkbox from '@mui/material/Checkbox';
 function PaymentForm() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Payment method
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         <Grid item xs={12} md={6}>
           <TextField
             required

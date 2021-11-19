@@ -15,19 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import paymentProcess from './paymentProcess.css';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -60,23 +49,21 @@ export default function Checkout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar
+      <AppBar 
         position="absolute"
-        color="default"
         elevation={0}
         sx={{
           position: 'relative',
           borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
+        }}>
+        <Toolbar style={{ background: '#1B4965' }}>
+          <Typography variant="h5" style={{ background: '#1B4965' }}>
+            EPSHOP
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+      <Container component="main" maxWidth="sm" sx={{ mb: 8 }}>
+        <Paper variant="standard" sx={{ my: { xs: 3, md: 6 }}}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
           </Typography>
@@ -104,7 +91,9 @@ export default function Checkout() {
                 {getStepContent(activeStep)}
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   {activeStep !== 0 && (
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                    <Button 
+                    variant="outlined"
+                    onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                       Back
                     </Button>
                   )}
@@ -113,15 +102,16 @@ export default function Checkout() {
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
+                    style={{color: '#000000'}}
                   >
                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+
                   </Button>
                 </Box>
               </React.Fragment>
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </Container>
     </ThemeProvider>
   );
