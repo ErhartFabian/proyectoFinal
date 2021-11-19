@@ -6,7 +6,8 @@ import { BrowserRouter as
   Route,
   Switch,
   Link,
-  NavLink } from "react-router-dom";
+  NavLink,
+} from "react-router-dom";
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           {/* ruta a home */}
           <Route path="/home" component={Home} />
           {/* ruta a  Inventory*/}
-          <Route path="/inventory" component={Inventory} />
+          <Route exact path="/inventory" component={Inventory} />
           {/* ruta para paymenprocess */}
           <Route path="/paymentprocess" component={PaymentProcess} />
           
