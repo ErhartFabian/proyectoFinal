@@ -1,10 +1,31 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import './home.css';
 
 function Home() {
 
-    /* d */
+    //arreglo que contiene arreglos con los nombres de los articulos
+    const [products, setProducts] = useState([]);
+    const [state, setState] = useState('IDLE');
+
+    useEffect(() => {
+    axios.get('https://fakestoreapi.com/products?limit=3')
+    .then(response => {
+        setState('LOADING');
+        var newproducts = [];
+        for (let i = 0; i < response.data.length; i++) {
+            newproducts.push(response.data[i]);
+        }
+        setProducts(newproducts);
+        setState('COMPLETE');
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    }, []);
+    
+    console.log(products);
 
     // go to inventory page
     const goToInventory = () => {
@@ -14,6 +35,10 @@ function Home() {
     const goToHome = () => {
         window.location.href = "/home";
     }
+
+
+
+    
 
 
     return (
@@ -38,6 +63,30 @@ function Home() {
             </div>
 
             <div className="body">
+
+                <div className="carousel_products">
+                    <h2>Products</h2>
+
+                    <div className="slideshow-container">
+                        {
+                            products.map((product) => {
+                                return (
+                                    <div className="mySlides fade" key={product.id} >
+                                        <div className="numbertext">1 / 3</div>
+                                        <img src={product.image} style={{width:"100px"}} key={product.id}>
+                                        </img>
+                                        <div className="text">{product.title}</div>
+                                    </div>
+                                    
+                                )
+                            })
+                        }
+                         
+
+                    </div>
+                    
+
+                </div>
 
                 <div className="aboutUs">
 
