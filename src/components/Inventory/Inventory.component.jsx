@@ -8,7 +8,7 @@ import { Tooltip } from '@mui/material';
 import axios from 'axios';
 
 
-function Inventory() {
+function Inventory(props) {
 
     //Estado que contiene un arreglo con los nombres de los articulos 
     const [artTitle, setArtTitle] = useState([]);
@@ -112,9 +112,15 @@ function Inventory() {
         return (
             <div id="articlesdiv">
                 <div id="topnav">
-                    <h1 id="compName">Eshop</h1>
-                    <img id="cartIcon" alt="cartIcon" src={cart}></img>
+                    <h1 id="compName" onClick={() => {
+                        props.history.goBack();
+                    }}>Eshop</h1>
 
+                    <Tooltip title={"Ir al carrito"} arrow>
+                    <button id="topcartbtn">
+                        <img id="cartIcon" alt="cartIcon" src={cart}></img>
+                    </button>
+                    </Tooltip>
                 </div>
 
                 <ul id="artsUl" style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap", justifyContent: 'center' }}>
