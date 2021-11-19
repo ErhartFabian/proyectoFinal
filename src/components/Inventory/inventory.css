@@ -33,14 +33,18 @@ html, body{
     border-radius: 10px;
 }
 
-button{
+#artSquare{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border: 0px;
     border-radius: 10px;
 
 }
 
-button:hover{
+#artSquare:hover{
     background-color: white;
     border: 3px groove gray;
 }
@@ -141,5 +145,17 @@ button:hover{
     width:30px;
     height: 30px;
     background-color: white;
+    margin-bottom: 1px;
 
+}
+#addbutton{
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    background-color: white;
+}
+
+#addbutton:hover{
+    border: 1px solid black;
+    background-color: white;
 }

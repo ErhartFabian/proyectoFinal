@@ -16,13 +16,13 @@ function Inventory() {
     const [artImg, setArtImg] = useState([]);
     //Estado que contiene un arreglo con los precios de los articulos 
     const [artPrice, setArtPrice] = useState([]);
-
+    //Estado que contiene la descripción de los articulos
     const [artDesc, setArtDesc] = useState([]);
+    //Estado que contiene la calificación de los articulos
     const [artRate, setArtRate] = useState([]);
+    //Estado que contiene la cantidad de los articulos
     const [artQ, setArtQ] = useState([]);
-
-
-
+    //Estado que contiene el estado de la pagina
     const [load, setLoad] = useState('idle_st');
 
     //función para generar la tabla con los articulos
@@ -33,19 +33,20 @@ function Inventory() {
         axios.get('https://fakestoreapi.com/products?limit=12').then(response => {
 
             console.log(response);
+            //El estado de la pagina pasa a cargando
             setLoad('loading_st');
 
             //Arreglo auxiliar para guardar los nombres de los articulos
             let newArtsT = [];
-
             //Arreglo auxiliar para guardar las imagenes de los articulos
             let newImgs = [];
-
             //Arreglo auxiliar para guardar los precios de los articulos
             let newPrices = [];
-
+            //Arreglo auxiliar para guardar las descripciones de los articulos
             let newDescs = [];
+            //Arreglo auxiliar para guardar las calificaciones de los articulos
             let newRates = [];
+            //Arreglo auxiliar para guardar las cantidades de los articulos
             let newQtys = [];
 
 
@@ -59,9 +60,9 @@ function Inventory() {
                 newRates.push(response.data[i].rating.rate);
                 newQtys.push(response.data[i].rating.count);
 
-
             }
 
+            //El estado de la carga pasa a completado
             setLoad('complete_st');
             //Pasa los datos a los estados de los arreglos
             setArtTitle(newArtsT);
@@ -74,7 +75,9 @@ function Inventory() {
         }
 
         ).catch(() => {
+
             alert("Algo salió mal :(");
+            //El estado de la pagina pasa a error
             setLoad('error_st');
         })
     }
@@ -85,6 +88,7 @@ function Inventory() {
     }, []);
 
     if (load === 'idle_st' || load === 'loading_st') {
+        //Si el estado de la pagina está en idle o cargando, manda la pantalla de carga
         return (
             <div id="loadscreen">
                 <img alt="clock" src={clock} id="clock" />
@@ -94,6 +98,7 @@ function Inventory() {
     }
 
     if (load === 'error_st') {
+        //Si el estado está en error, manda la pantalla de error
         return (
             <div id="errorscreen">
                 <img alt="error" src={error} id="errorimg" />
@@ -103,16 +108,11 @@ function Inventory() {
     }
 
     if (load === 'complete_st') {
+        //Si el estado pasa a completo, imprime los articulos
         return (
             <div id="articlesdiv">
                 <div id="topnav">
                     <h1 id="compName">Eshop</h1>
-
-                    <div id="searchbar">
-                        <input type="text" placeholder="Search..." />
-                        <button type="submit">Search</button>
-                    </div>
-
                     <img id="cartIcon" alt="cartIcon" src={cart}></img>
 
                 </div>
@@ -128,14 +128,14 @@ function Inventory() {
                             <div className="App" key={article}>
 
                                 <div id="artTable" key={article}>
-                                    <button
+                                    <div id="artSquare"
                                         className="artTabs"
                                         type="button"
                                         key={article}
                                         name={article}
                                         style={{
                                             width: '305px',
-                                            height: '500px',
+                                            height: '490px',
                                             margin: '2px solid black',
 
                                         }}
@@ -147,7 +147,7 @@ function Inventory() {
                                             alt={article}
                                             src={images}
                                             style={{
-                                                width: '100%',
+                                                width: '250px',
                                                 height: '280px',
                                                 marginBottom: '10px',
 
@@ -161,11 +161,12 @@ function Inventory() {
                                         <p id="artQs">{"Disponibles: " + artQ[articleImg]}</p>
 
                                         <Tooltip title="Agregar al carrito" arrow>
-                                            <button type="button">
+                                            <button id="addbutton" type="button">
                                                 <img alt="addcart" id="add2cart" src={add2Cart}></img>
                                             </button>
                                         </Tooltip>
-                                    </button>
+                                    </div>
+
                                 </div>
                             </div>
                         )
