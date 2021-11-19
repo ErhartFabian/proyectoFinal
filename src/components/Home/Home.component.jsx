@@ -4,17 +4,7 @@ import './home.css';
 
 function Home() {
     
-    /* useEffect(() => {
-        axios.get(`https://source.unsplash.com/collection/190727/1600x900`)   
-        .then(res => {
-        console.log(res);
-        //
-        })
-        .catch(err   => {
-          console.log(err);
-        });
-        
-      },[]); */
+    /* d */
 
     // go to inventory page
     const goToInventory = () => {
@@ -27,15 +17,13 @@ function Home() {
         
 
     return (
-        <div className="container is-full">
-            <div className="columns">
-                <div className="column">
-                    <button onClick={goToHome} >Home</button>
-                </div>
-                <div className="column">
-                    <button onClick={goToInventory} >Inventory</button>
-                </div> 
-            </div>
+        <div className="columns">
+            <button className="column" onClick={goToHome}>
+                Home
+            </button>
+            <button className="column" onClick={goToInventory} >
+                Inventory
+            </button> 
 
         
 

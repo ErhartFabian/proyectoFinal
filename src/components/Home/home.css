@@ -1,21 +1,25 @@
 *{
+    margin: 0px;
+    padding: 0px;
+    background-color: #E0E2DB;
 }
 
 
 .columns{
-    background-color: #3bc14a   ;
     margin: 20px;
     box-sizing: border-box;
     border-radius: 10px;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 .column{
-    display: flex;
-    justify-content: center;
     align-items: center;
     box-sizing: border-box;
     padding: 0%;
     height: 40px;
+
 }
 .column:hover{
     background-color: #4da167;
@@ -28,7 +32,7 @@ button{
     border-radius: 10px;
     color: white;
     border: none;
-    width: 100%;
+    width: 40%;
     height: 100%;
     padding: 0%;
 }
@@ -37,4 +41,5 @@ button:hover{
     background-color: #4da167;
     color: rgb(34, 34, 34);
     border-radius: 10px;
+
 }
