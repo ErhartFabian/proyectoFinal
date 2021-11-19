@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './inventory.css';
 import cart from './cart.png';
+import add2Cart from './shopping-cart.png'
 import clock from './loadimg.png';
-import error from './errorimg.png'
+import error from './errorimg.png';
+import { Tooltip } from '@mui/material';
 import axios from 'axios';
 
 
@@ -14,10 +16,10 @@ function Inventory() {
     const [artImg, setArtImg] = useState([]);
     //Estado que contiene un arreglo con los precios de los articulos 
     const [artPrice, setArtPrice] = useState([]);
-    
+
     const [artDesc, setArtDesc] = useState([]);
     const [artRate, setArtRate] = useState([]);
-    const [artQ, setArtQ]= useState([]);
+    const [artQ, setArtQ] = useState([]);
 
 
 
@@ -42,9 +44,9 @@ function Inventory() {
             //Arreglo auxiliar para guardar los precios de los articulos
             let newPrices = [];
 
-            let newDescs=[];
-            let newRates=[];
-            let newQtys=[];
+            let newDescs = [];
+            let newRates = [];
+            let newQtys = [];
 
 
             //Ciclo para guardar los datos en cada arreglo
@@ -85,7 +87,7 @@ function Inventory() {
     if (load === 'idle_st' || load === 'loading_st') {
         return (
             <div id="loadscreen">
-                <img alt="clock" src={clock} id="clock"/>
+                <img alt="clock" src={clock} id="clock" />
                 <p id="loadingtxt">LOADING ARTICLES, PLEASE WAIT...</p>
             </div>
         );
@@ -94,7 +96,7 @@ function Inventory() {
     if (load === 'error_st') {
         return (
             <div id="errorscreen">
-                <img alt="error" src={error} id="errorimg"/>
+                <img alt="error" src={error} id="errorimg" />
                 <p id="errortxt">HMMM SOMETHING WENT WRONG :( PLEASE RECHARGE</p>
             </div>
         );
@@ -102,7 +104,7 @@ function Inventory() {
 
     if (load === 'complete_st') {
         return (
-            <div id="articlsdiv">
+            <div id="articlesdiv">
                 <div id="topnav">
                     <h1 id="compName">Eshop</h1>
 
@@ -115,7 +117,7 @@ function Inventory() {
 
                 </div>
 
-                <ul id= "artsUl" style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap", justifyContent:'center'}}>
+                <ul id="artsUl" style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap", justifyContent: 'center' }}>
 
 
                     {artTitle.map((article, articleImg) => {
@@ -132,12 +134,12 @@ function Inventory() {
                                         key={article}
                                         name={article}
                                         style={{
-                                            width: '300px',
-                                            height: '400px',
+                                            width: '305px',
+                                            height: '500px',
                                             margin: '2px solid black',
-                                            color:'white'
-                                        }}>
 
+                                        }}
+                                    >
                                         <img
                                             className="imagesDisplay"
                                             key={articleImg}
@@ -146,14 +148,23 @@ function Inventory() {
                                             src={images}
                                             style={{
                                                 width: '100%',
-                                                height: '250px',
+                                                height: '280px',
+                                                marginBottom: '10px',
+
                                             }}
                                         />
+
+
                                         <p id="artName">{article}</p>
                                         <p id="artP">{"$" + artPrice[articleImg]}</p>
-                                        <p id="artR">{"Valoración: "+artRate[articleImg]}</p>
-                                        <p id="artQs">{"Disponibles: "+ artQ[articleImg]}</p>
+                                        <p id="artR">{"Valoración: " + artRate[articleImg] + " de 5"}</p>
+                                        <p id="artQs">{"Disponibles: " + artQ[articleImg]}</p>
 
+                                        <Tooltip title="Agregar al carrito" arrow>
+                                            <button type="button">
+                                                <img alt="addcart" id="add2cart" src={add2Cart}></img>
+                                            </button>
+                                        </Tooltip>
                                     </button>
                                 </div>
                             </div>

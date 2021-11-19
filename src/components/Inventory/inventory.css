@@ -26,14 +26,28 @@ html, body{
 }
 
 .artTable{
-    width: 290px;
-    height: 400px;
+    width: 305px;
+    height: 500px;
     padding: 0%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+button{
+    background-color: white;
+    border: 0px;
+    border-radius: 10px;
+
+}
+
+button:hover{
+    background-color: white;
+    border: 3px groove gray;
 }
 
 .App{
     margin: 20px;
-    height: 400px;
+    height: 500px;
 }
 
 #cartIcon{
@@ -95,21 +109,37 @@ html, body{
 #artName{
     color:black;
     font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    margin-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    background-color: white;
+
 }
 #artP{
     color:black;
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
+    background-color: white;
+
 }
 #artR{
     color:black;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+    background-color: white;
+
 }
 #artQs{
     color:black;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
+    background-color: white;
+    margin-bottom: 10px;
+
+}
+
+#add2cart{
+    width:30px;
+    height: 30px;
+    background-color: white;
+
 }
