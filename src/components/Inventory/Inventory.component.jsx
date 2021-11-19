@@ -17,6 +17,7 @@ function Inventory() {
     
     const [artDesc, setArtDesc] = useState([]);
     const [artRate, setArtRate] = useState([]);
+    const [artQ, setArtQ]= useState([]);
 
 
 
@@ -43,6 +44,7 @@ function Inventory() {
 
             let newDescs=[];
             let newRates=[];
+            let newQtys=[];
 
 
             //Ciclo para guardar los datos en cada arreglo
@@ -53,6 +55,8 @@ function Inventory() {
                 newPrices.push(response.data[i].price);
                 newDescs.push(response.data[i].description);
                 newRates.push(response.data[i].rating.rate);
+                newQtys.push(response.data[i].rating.count);
+
 
             }
 
@@ -63,6 +67,7 @@ function Inventory() {
             setArtPrice(newPrices);
             setArtDesc(newDescs);
             setArtRate(newRates);
+            setArtQ(newQtys);
 
         }
 
@@ -97,7 +102,7 @@ function Inventory() {
 
     if (load === 'complete_st') {
         return (
-            <div>
+            <div id="articlsdiv">
                 <div id="topnav">
                     <h1 id="compName">Eshop</h1>
 
@@ -110,7 +115,7 @@ function Inventory() {
 
                 </div>
 
-                <ul style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap" }}>
+                <ul id= "artsUl" style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap", justifyContent:'center'}}>
 
 
                     {artTitle.map((article, articleImg) => {
@@ -127,8 +132,10 @@ function Inventory() {
                                         key={article}
                                         name={article}
                                         style={{
-                                            width: '400px',
+                                            width: '300px',
                                             height: '400px',
+                                            margin: '2px solid black',
+                                            color:'white'
                                         }}>
 
                                         <img
@@ -138,18 +145,14 @@ function Inventory() {
                                             alt={article}
                                             src={images}
                                             style={{
-                                                width: '250px',
+                                                width: '100%',
                                                 height: '250px',
                                             }}
                                         />
-                                        <p>{article}</p>
-                                        <p>{artDesc[articleImg]}</p>
-                                        <p>{"$" + artPrice[articleImg]}</p>
-                                        <p>{artRate[articleImg]}</p>
-
-
-
-
+                                        <p id="artName">{article}</p>
+                                        <p id="artP">{"$" + artPrice[articleImg]}</p>
+                                        <p id="artR">{"Valoración: "+artRate[articleImg]}</p>
+                                        <p id="artQs">{"Disponibles: "+ artQ[articleImg]}</p>
 
                                     </button>
                                 </div>

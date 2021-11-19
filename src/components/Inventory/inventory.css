@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 html, body{
     height: 100%;
@@ -15,16 +16,30 @@ html, body{
     flex-direction:row;
     justify-content:space-around;
     align-items: center;
-    background-color: #20203f;
+    background-color: #1B4965;
+    height: 100px;
 }
 
 #compName{
     color:aliceblue;
+    background-color: #1B4965;
+}
+
+.artTable{
+    width: 290px;
+    height: 400px;
+    padding: 0%;
+}
+
+.App{
+    margin: 20px;
+    height: 400px;
 }
 
 #cartIcon{
     height: 45px;
     width: 45px;
+    background-color: #1B4965;
 }
 
 #loadscreen{
@@ -75,4 +90,26 @@ html, body{
     color:white;
     font-size: 70px;
     background-color: #5FA8D3;
+}
+
+#artName{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+#artP{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+#artR{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+#artQs{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
 }
