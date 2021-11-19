@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+#root{
+    height: 100%;
+    width: 100%;
+}
+
 #topnav{
     display: flex;
     flex-direction:row;
@@ -13,4 +25,54 @@
 #cartIcon{
     height: 45px;
     width: 45px;
+}
+
+#loadscreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #5FA8D3;
+}
+
+#errorscreen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #1B4965;
+}
+
+#errorimg{
+    height: 300px;
+    width: 300px;
+    background-color: #1B4965;
+    margin-bottom: 30px;
+
+
+}
+
+#errortxt{
+    font-family: 'Rubik', sans-serif;
+    color:white;
+    font-size: 50px;
+    background-color: #1B4965;
+}
+
+#clock{
+    height: 300px;
+    width: 300px;
+    margin-bottom: 30px;
+    background-color: #5FA8D3;
+}
+
+#loadingtxt{
+    font-family: 'Rubik', sans-serif;
+    color:white;
+    font-size: 70px;
+    background-color: #5FA8D3;
 }
