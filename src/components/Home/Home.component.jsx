@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import './home.css';
+import Carousel from "./Carousel.component.jsx";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 function Home() {
 
@@ -9,7 +12,7 @@ function Home() {
     const [state, setState] = useState('IDLE');
 
     useEffect(() => {
-    axios.get('https://fakestoreapi.com/products?limit=3')
+    axios.get('https://fakestoreapi.com/products?limit=10')
     .then(response => {
         setState('LOADING');
         var newproducts = [];
@@ -65,26 +68,10 @@ function Home() {
             <div className="body">
 
                 <div className="carousel_products">
-                    <h2>Products</h2>
-
-                    <div className="slideshow-container">
-                        {
-                            products.map((product) => {
-                                return (
-                                    <div className="mySlides fade" key={product.id} >
-                                        <div className="numbertext">1 / 3</div>
-                                        <img src={product.image} style={{width:"100px"}} key={product.id}>
-                                        </img>
-                                        <div className="text">{product.title}</div>
-                                    </div>
-                                    
-                                )
-                            })
-                        }
-                         
-
-                    </div>
+                    <h2>Best Seller</h2>
                     
+                    <Carousel products={products} />
+                  
 
                 </div>
 
