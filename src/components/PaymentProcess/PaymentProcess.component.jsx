@@ -15,7 +15,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import paymentProcess from './paymentProcess.css';
 
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -102,7 +101,8 @@ export default function Checkout() {
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 3, ml: 1 }}
-                    style={{color: '#000000'}}
+                    className="boton"
+                    style={{ background: '#1B4965' }}
                   >
                     {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
 
