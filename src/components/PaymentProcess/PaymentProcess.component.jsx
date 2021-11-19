@@ -1,219 +1,128 @@
-import react from "react";
-function PaymentProcess() {
-    const tarjeta = document.querySelector('#tarjeta'),
-      btnAbrirFormulario = document.querySelector('#btn-abrir-formulario'),
-      formulario = document.querySelector('#formulario-tarjeta'),
-      numeroTarjeta = document.querySelector('#tarjeta .numero'),
-      nombreTarjeta = document.querySelector('#tarjeta .nombre'),
-      logoMarca = document.querySelector('#logo-marca'),
-      firma = document.querySelector('#tarjeta .firma p'),
-      mesExpiracion = document.querySelector('#tarjeta .mes'),
-      yearExpiracion = document.querySelector('#tarjeta .year');
-    const ccv = document.querySelector('#tarjeta .ccv');
+import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { AppBar } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import Paper from '@mui/material/Paper';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
+import Review from './Review';
 
-    // * Volteamos la tarjeta para mostrar el frente.
-    const mostrarFrente = () => {
-        if(tarjeta.classList.contains('active')){
-            tarjeta.classList.remove('active');
-        }
-    }
-
-    // * Rotacion de la tarjeta
-    tarjeta.addEventListener('click', () => {
-        tarjeta.classList.toggle('active');
-    });
-
-    // * Boton de abrir formulario
-    btnAbrirFormulario.addEventListener('click', () => {
-        btnAbrirFormulario.classList.toggle('active');
-        formulario.classList.toggle('active');
-    });
-
-    // * Select del mes generado dinamicamente.
-    for(let i = 1; i <= 12; i++){
-        let opcion = document.createElement('option');
-        opcion.value = i;
-        opcion.innerText = i;
-        formulario.selectMes.appendChild(opcion);
-    }
-
-    // * Select del año generado dinamicamente.
-    const yearActual = new Date().getFullYear();
-    for(let i = yearActual; i <= yearActual + 8; i++){
-        let opcion = document.createElement('option');
-        opcion.value = i;
-        opcion.innerText = i;
-        formulario.selectYear.appendChild(opcion);
-    }
-
-    // * Input numero de tarjeta
-    formulario.inputNumero.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-
-        formulario.inputNumero.value = valorInput
-        // Eliminamos espacios en blanco
-        .replace(/\s/g, '')
-        // Eliminar las letras
-        .replace(/\D/g, '')
-        // Ponemos espacio cada cuatro numeros
-        .replace(/([0-9]{4})/g, '$1 ')
-        // Elimina el ultimo espaciado
-        .trim();
-
-        numeroTarjeta.textContent = valorInput;
-
-        if(valorInput == ''){
-            numeroTarjeta.textContent = '#### #### #### ####';
-
-            logoMarca.innerHTML = '';
-        }
-
-        if(valorInput[0] == 4){
-            logoMarca.innerHTML = '';
-            const imagen = document.createElement('img');
-            imagen.src = 'img/logos/visa.png';
-            logoMarca.appendChild(imagen);
-        } else if(valorInput[0] == 5){
-            logoMarca.innerHTML = '';
-            const imagen = document.createElement('img');
-            imagen.src = 'img/logos/mastercard.png';
-            logoMarca.appendChild(imagen);
-        }
-
-        // Volteamos la tarjeta para que el usuario vea el frente.
-        mostrarFrente();
-    });
-
-    // * Input nombre de tarjeta
-    formulario.inputNombre.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-
-        formulario.inputNombre.value = valorInput.replace(/[0-9]/g, '');
-        nombreTarjeta.textContent = valorInput;
-        firma.textContent = valorInput;
-
-        if(valorInput == ''){
-            nombreTarjeta.textContent = 'Jhon Doe';
-        }
-
-        mostrarFrente();
-    });
-
-    // * Select mes
-    formulario.selectMes.addEventListener('change', (e) => {
-        mesExpiracion.textContent = e.target.value;
-        mostrarFrente();
-    });
-
-    // * Select Año
-    formulario.selectYear.addEventListener('change', (e) => {
-        yearExpiracion.textContent = e.target.value.slice(2);
-        mostrarFrente();
-    });
-
-    // * CCV
-    formulario.inputCCV.addEventListener('keyup', () => {
-        if(!tarjeta.classList.contains('active')){
-            tarjeta.classList.toggle('active');
-        }
-
-        formulario.inputCCV.value = formulario.inputCCV.value
-        // Eliminar los espacios
-        .replace(/\s/g, '')
-        // Eliminar las letras
-        .replace(/\D/g, '');
-
-        ccv.textContent = formulario.inputCCV.value;
-    });
-
-    return (
-       
-        <div class="contenedor">
-            <section class="tarjeta" id="tarjeta">
-                <div class="delantera">
-                    <div class="logo-marca" id="logo-marca">
-                        <img src="img/logos/visa.png" alt=""></img>
-                    </div>
-                    <img src="img/chip-tarjeta.png" class="chip" alt=""></img>
-                    <div class="datos">
-                        <div class="grupo" id="numero">
-                            <p class="label">Número Tarjeta</p>
-                            <p class="numero">#### #### #### ####</p>
-                        </div>
-                        <div class="flexbox">
-                            <div class="grupo" id="nombre">
-                                <p class="label">Nombre Tarjeta</p>
-                                <p class="nombre">Jhon Doe</p>
-                            </div>
-
-                            <div class="grupo" id="expiracion">
-                                <p class="label">Expiracion</p>
-                                <p class="expiracion"><span class="mes">MM</span> / <span class="year">AA</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="trasera">
-                    <div class="barra-magnetica"></div>
-                    <div class="datos">
-                        <div class="grupo" id="firma">
-                            <p class="label">Firma</p>
-                            <div class="firma"><p></p></div>
-                        </div>
-                        <div class="grupo" id="ccv">
-                            <p class="label">CCV</p>
-                            <p class="ccv"></p>
-                        </div>
-                    </div>
-                    <p class="leyenda">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem, voluptates illo.</p>
-                    <a href="#" class="link-banco">www.tubanco.com</a>
-                </div>
-            </section>
-
-            <div class="contenedor-btn">
-                <button class="btn-abrir-formulario" id="btn-abrir-formulario">
-                    <i class="fas fa-plus"></i>
-                </button>
-            </div>
-
-            <form action="" id="formulario-tarjeta" class="formulario-tarjeta">
-                <div class="grupo">
-                    <label for="inputNumero">Número Tarjeta</label>
-                    <input type="text" id="inputNumero" maxlength="19" autocomplete="off"></input>
-                </div>
-                <div class="grupo">
-                    <label for="inputNombre">Nombre</label>
-                    <input type="text" id="inputNombre" maxlength="19" autocomplete="off"></input>
-                </div>
-                <div class="flexbox">
-                    <div class="grupo expira">
-                        <label for="selectMes">Expiracion</label>
-                        <div class="flexbox">
-                            <div class="grupo-select">
-                                <select name="mes" id="selectMes">
-                                    <option disabled selected>Mes</option>
-                                </select>
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                            <div class="grupo-select">
-                                <select name="year" id="selectYear">
-                                    <option disabled selected>Año</option>
-                                </select>
-                                <i class="fas fa-angle-down"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grupo ccv">
-                        <label for="inputCCV">CCV</label>
-                        <input type="text" id="inputCCV" maxlength="3"></input>
-                    </div>
-                </div>
-                <button type="submit" class="btn-enviar">Enviar</button>
-            </form>
-        </div>
-        
-    );
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
-export default PaymentProcess;   
+
+const steps = ['Shipping address', 'Payment details', 'Review your order'];
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return <AddressForm />;
+    case 1:
+      return <PaymentForm />;
+    case 2:
+      return <Review />;
+    default:
+      throw new Error('Unknown step');
+  }
+}
+
+const theme = createTheme();
+
+export default function Checkout() {
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppBar
+        position="absolute"
+        color="default"
+        elevation={0}
+        sx={{
+          position: 'relative',
+          borderBottom: (t) => `1px solid ${t.palette.divider}`,
+        }}
+      >
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            Company name
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Typography component="h1" variant="h4" align="center">
+            Checkout
+          </Typography>
+          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <React.Fragment>
+            {activeStep === steps.length ? (
+              <React.Fragment>
+                <Typography variant="h5" gutterBottom>
+                  Thank you for your order.
+                </Typography>
+                <Typography variant="subtitle1">
+                  Your order number is #2001539. We have emailed your order
+                  confirmation, and will send you an update when your order has
+                  shipped.
+                </Typography>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                {getStepContent(activeStep)}
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {activeStep !== 0 && (
+                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                      Back
+                    </Button>
+                  )}
+
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
+                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                  </Button>
+                </Box>
+              </React.Fragment>
+            )}
+          </React.Fragment>
+        </Paper>
+        <Copyright />
+      </Container>
+    </ThemeProvider>
+  );
+}
