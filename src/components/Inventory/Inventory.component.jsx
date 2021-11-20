@@ -117,9 +117,9 @@ function Inventory(props) {
                     }}>Eshop</h1>
 
                     <Tooltip title={"Ir al carrito"} arrow>
-                    <button id="topcartbtn">
-                        <img id="cartIcon" alt="cartIcon" src={cart}></img>
-                    </button>
+                        <button id="topcartbtn">
+                            <img id="cartIcon" alt="cartIcon" src={cart}></img>
+                        </button>
                     </Tooltip>
                 </div>
 
