@@ -89,7 +89,7 @@ function Inventory(props) {
                                         />
 
 
-                                        <p id="artName">{article}</p>
+                                        <p id="artName">{article.title}</p>
                                         <p id="artP">{"$" + article.price}</p>
                                         <p id="artR">{"Valoración: " + article.rating.rate + " de 5"}</p>
                                         <p id="artQs">{"Disponibles: " + article.rating.count}</p>
