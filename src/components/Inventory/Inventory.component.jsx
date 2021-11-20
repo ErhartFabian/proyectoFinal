@@ -16,8 +16,6 @@ function Inventory(props) {
     const [artImg, setArtImg] = useState([]);
     //Estado que contiene un arreglo con los precios de los articulos 
     const [artPrice, setArtPrice] = useState([]);
-    //Estado que contiene la descripción de los articulos
-    const [artDesc, setArtDesc] = useState([]);
     //Estado que contiene la calificación de los articulos
     const [artRate, setArtRate] = useState([]);
     //Estado que contiene la cantidad de los articulos
@@ -42,8 +40,6 @@ function Inventory(props) {
             let newImgs = [];
             //Arreglo auxiliar para guardar los precios de los articulos
             let newPrices = [];
-            //Arreglo auxiliar para guardar las descripciones de los articulos
-            let newDescs = [];
             //Arreglo auxiliar para guardar las calificaciones de los articulos
             let newRates = [];
             //Arreglo auxiliar para guardar las cantidades de los articulos
@@ -56,7 +52,6 @@ function Inventory(props) {
                 newArtsT.push(response.data[i].title);
                 newImgs.push(response.data[i].image);
                 newPrices.push(response.data[i].price);
-                newDescs.push(response.data[i].description);
                 newRates.push(response.data[i].rating.rate);
                 newQtys.push(response.data[i].rating.count);
 
@@ -68,7 +63,6 @@ function Inventory(props) {
             setArtTitle(newArtsT);
             setArtImg(newImgs);
             setArtPrice(newPrices);
-            setArtDesc(newDescs);
             setArtRate(newRates);
             setArtQ(newQtys);
 
@@ -123,7 +117,12 @@ function Inventory(props) {
                     </Tooltip>
                 </div>
 
-                <ul id="artsUl" style={{ display: 'flex', listStyle: 'none', flexWrap: "wrap", justifyContent: 'center' }}>
+                <ul id="artsUl" style={{
+                    display: 'flex',
+                    listStyle: 'none',
+                    flexWrap: "wrap",
+                    justifyContent: 'center'
+                }}>
 
 
                     {artTitle.map((article, articleImg) => {
@@ -143,7 +142,6 @@ function Inventory(props) {
                                             width: '305px',
                                             height: '490px',
                                             margin: '2px solid black',
-
                                         }}
                                     >
                                         <img
