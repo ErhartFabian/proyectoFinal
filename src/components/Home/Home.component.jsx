@@ -1,14 +1,13 @@
-import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import './home.css';
 import Carousel from "./Carousel.component.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
-function Home() {
+function Home(props) {
 
     //arreglo que contiene arreglos con los nombres de los articulos
-    const [products, setProducts] = useState([]);
+    /* const [products, setProducts] = useState([]);
     const [state, setState] = useState('IDLE');
 
     useEffect(() => {
@@ -26,9 +25,8 @@ function Home() {
         console.log(error);
     });
 
-    }, []);
+    }, []); */
     
-    console.log(products);
 
     // go to inventory page
     const goToInventory = () => {
@@ -69,8 +67,8 @@ function Home() {
 
                 <div className="carousel_products">
                     <h2>Best Seller</h2>
-                    
-                    <Carousel products={products} />
+
+                    <Carousel products={props.products} />
                   
 
                 </div>

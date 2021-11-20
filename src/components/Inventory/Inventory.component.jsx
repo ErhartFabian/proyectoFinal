@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './inventory.css';
 import cart from './cart.png';
 import add2Cart from './shopping-cart.png'
@@ -10,78 +10,9 @@ import axios from 'axios';
 
 function Inventory(props) {
 
-    //Estado que contiene un arreglo con los nombres de los articulos 
-    const [artTitle, setArtTitle] = useState([]);
-    //Estado que contiene un arreglo con las urls (de imagenes) de los articulos 
-    const [artImg, setArtImg] = useState([]);
-    //Estado que contiene un arreglo con los precios de los articulos 
-    const [artPrice, setArtPrice] = useState([]);
-    //Estado que contiene la calificación de los articulos
-    const [artRate, setArtRate] = useState([]);
-    //Estado que contiene la cantidad de los articulos
-    const [artQ, setArtQ] = useState([]);
-    //Estado que contiene el estado de la pagina
-    const [load, setLoad] = useState('idle_st');
+    
 
-    //función para generar la tabla con los articulos
-    function getArticles() {
-
-        //Solicita 12 articulos a través de la API
-
-        axios.get('https://fakestoreapi.com/products?limit=12').then(response => {
-
-            console.log(response);
-            //El estado de la pagina pasa a cargando
-            setLoad('loading_st');
-
-            //Arreglo auxiliar para guardar los nombres de los articulos
-            let newArtsT = [];
-            //Arreglo auxiliar para guardar las imagenes de los articulos
-            let newImgs = [];
-            //Arreglo auxiliar para guardar los precios de los articulos
-            let newPrices = [];
-            //Arreglo auxiliar para guardar las calificaciones de los articulos
-            let newRates = [];
-            //Arreglo auxiliar para guardar las cantidades de los articulos
-            let newQtys = [];
-
-
-            //Ciclo para guardar los datos en cada arreglo
-            for (let i = 0; i < 12; i++) {
-
-                newArtsT.push(response.data[i].title);
-                newImgs.push(response.data[i].image);
-                newPrices.push(response.data[i].price);
-                newRates.push(response.data[i].rating.rate);
-                newQtys.push(response.data[i].rating.count);
-
-            }
-
-            //El estado de la carga pasa a completado
-            setLoad('complete_st');
-            //Pasa los datos a los estados de los arreglos
-            setArtTitle(newArtsT);
-            setArtImg(newImgs);
-            setArtPrice(newPrices);
-            setArtRate(newRates);
-            setArtQ(newQtys);
-
-        }
-
-        ).catch(() => {
-
-            alert("Algo salió mal :(");
-            //El estado de la pagina pasa a error
-            setLoad('error_st');
-        })
-    }
-
-    //Se llamarán los articulos cada que se reinicie la pagina
-    useEffect(() => {
-        getArticles();
-    }, []);
-
-    if (load === 'idle_st' || load === 'loading_st') {
+    if (props.load === 'idle_st' || props.load === 'loading_st') {
         //Si el estado de la pagina está en idle o cargando, manda la pantalla de carga
         return (
             <div id="loadscreen">
@@ -91,7 +22,7 @@ function Inventory(props) {
         );
     }
 
-    if (load === 'error_st') {
+    if (props.load === 'error_st') {
         //Si el estado está en error, manda la pantalla de error
         return (
             <div id="errorscreen">
@@ -101,7 +32,7 @@ function Inventory(props) {
         );
     }
 
-    if (load === 'complete_st') {
+    if (props.load === 'complete_st') {
         //Si el estado pasa a completo, imprime los articulos
         return (
             <div id="articlesdiv">
@@ -125,19 +56,18 @@ function Inventory(props) {
                 }}>
 
 
-                    {artTitle.map((article, articleImg) => {
-                        const images = artImg[articleImg];
+                    {props.products.map((article) => {
 
                         return (
 
-                            <div className="App" key={article}>
+                            <div className="App" key={article.title}>
 
-                                <div id="artTable" key={article}>
+                                 <div id="artTable" key={article.title}>
                                     <div id="artSquare"
                                         className="artTabs"
                                         type="button"
-                                        key={article}
-                                        name={article}
+                                        key={article.title}
+                                        name={article.title}
                                         style={{
                                             width: '305px',
                                             height: '490px',
@@ -146,10 +76,10 @@ function Inventory(props) {
                                     >
                                         <img
                                             className="imagesDisplay"
-                                            key={articleImg}
-                                            name={article}
-                                            alt={article}
-                                            src={images}
+                                            key={article.title}
+                                            name={article.title}
+                                            alt={article.title}
+                                            src={article.image}
                                             style={{
                                                 width: '250px',
                                                 height: '280px',
@@ -160,9 +90,9 @@ function Inventory(props) {
 
 
                                         <p id="artName">{article}</p>
-                                        <p id="artP">{"$" + artPrice[articleImg]}</p>
-                                        <p id="artR">{"Valoración: " + artRate[articleImg] + " de 5"}</p>
-                                        <p id="artQs">{"Disponibles: " + artQ[articleImg]}</p>
+                                        <p id="artP">{"$" + article.price}</p>
+                                        <p id="artR">{"Valoración: " + article.rating.rate + " de 5"}</p>
+                                        <p id="artQs">{"Disponibles: " + article.rating.count}</p>
 
                                         <Tooltip title="Agregar al carrito" arrow>
                                             <button id="addbutton" type="button">
@@ -171,7 +101,7 @@ function Inventory(props) {
                                         </Tooltip>
                                     </div>
 
-                                </div>
+                                </div> 
                             </div>
                         )
 
