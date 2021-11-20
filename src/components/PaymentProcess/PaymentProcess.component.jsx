@@ -1,118 +1,114 @@
-import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import { AppBar } from '@mui/material';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import Paper from '@mui/material/Paper';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import React, {useState} from 'react';
+import './paymentProcess.css';
 
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+function Checkout() {
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
+    const[state, setState] = useState({
+        firstname: "",
+        email:"",
+        address:"",
+        city:"",
+        state:"",
+        zip:"",
+        cardname:"",
+        cardnumber:"",
+        expmonth:"",
+        expyear:"",
+        cvv:"",
+    });
 
-const theme = createTheme();
+    function Vacio() {
+        const arr = Object.keys(state).map((propiedad) => state[propiedad]);
+        for (let i = 0; i < arr.length; i++)
+        {
+          if(arr[i] === "") {
+            return true;
+          }
+        }
+        return false;
+    }
 
-export default function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
+    function onSubmit(event) {
+        event.preventDefault();
+        if(Vacio()) {
+            alert("Faltan campos por llenar!!");
+        }
+        else{
+         alert("Su compra fue exitosa!!");
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
+        }
+    }
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+    function handleChange(event) {
+        const value = event.target.value;
+        setState({
+          ...state,
+          [event.target.name]:value,
+        });
+    }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar 
-        position="absolute"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}>
-        <Toolbar style={{ background: '#1B4965' }}>
-          <Typography variant="h5" style={{ background: '#1B4965' }}>
-            EPSHOP
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 8 }}>
-        <Paper variant="standard" sx={{ my: { xs: 3, md: 6 }}}>
-          <Typography component="h1" variant="h4" align="center">
-            Checkout
-          </Typography>
-          <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  {activeStep !== 0 && (
-                    <Button 
-                    variant="outlined"
-                    onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
-                    </Button>
-                  )}
+    <div className="main">
+        <div className="col-75">
+            <div className="container">
+                <div className="main">
+                  <div className="col-50">
+                    <h3>Shiping Address</h3>
+                    <label htmlFor="fname">Full Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Yvone" onChange={handleChange}></input>
+                    <label htmlFor="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="yvone@example.com" onChange={handleChange}></input>
+                    <label htmlFor="adr">Address</label>
+                    <input type="text" id="adr" name="address" placeholder="123 Street" onChange={handleChange}></input>
+                    <label htmlFor="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="Pachuca" onChange={handleChange}></input>
 
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                    className="boton"
-                    style={{ background: '#1B4965' }}
-                  >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    <div className="main">
+                      <div className="col-50">
+                        <label htmlFor="state">State</label>
+                        <input type="text" id="state" name="state" placeholder="Hgo" onChange={handleChange}></input>
+                      </div>
+                      <div className="col-50">
+                        <label htmlFor="zip">Zip Code</label>
+                        <input type="text" id="zip" name="zip" placeholder="10001" onChange={handleChange}></input>
+                      </div>
+                    </div>
+                  </div>
 
-                  </Button>
-                </Box>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+                  <div className="col-50">
+                    <h3>Payment</h3>
+                    <label htmlFor="cname">Name on Card</label>
+                    <input type="text" id="cname" name="cardname" placeholder="Yvone" onChange={handleChange}></input>
+                    <label htmlFor="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" onChange={handleChange}></input>
+                    <label htmlFor="expmonth">Exp Month</label>
+                    <input type="text" id="expmonth" name="expmonth" placeholder="September" onChange={handleChange}></input>
+
+                    <div className="main">
+                      <div className="col-50">
+                        <label htmlFor="expyear">Exp Year</label>
+                        <input type="text" id="expyear" name="expyear" placeholder="2018" onChange={handleChange}></input>
+                      </div>
+                      <div className="col-50">
+                        <label htmlFor="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="352" onChange={handleChange}></input>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <input type="submit" value="Continue to checkout" className="btn" onClick={onSubmit}></input>
+            </div>
+          </div>
+
+          <div className="col-25">
+            <div className="container">
+              <h4>Cart Total</h4>
+              <p>Total <span className="price" style={{color: "black"}}><b>$30</b></span></p>
+            </div>
+          </div>
+        </div>
   );
 }
+export default Checkout;
