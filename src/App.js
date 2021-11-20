@@ -29,9 +29,8 @@ function App() {
 
           <Route path="/" render={()=>{
             return(
-              <div className="component" style={{fontSize:"100px",display:'flex',justifyContent:"center"}} >
-
-                <h1>404 NOT FOUND</h1>
+              <div className="component" style={{fontSize:"100px",display:'flex',flexDirection:"column",alignItems:"center",justifyContent:"center",backgroundColor:"#ffbc01",width:"100vw",height:"100vh"}} >
+                <img src="https://dinahosting.com/blog/cont/uploads/2021/03/error-404.jpg" height="600px"></img>
               </div>
             )
           }

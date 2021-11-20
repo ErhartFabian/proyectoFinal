@@ -2,7 +2,8 @@
     margin: 0px;
     padding: 0px;
     background-color: #E0E2DB;
-    box-sizing:border-box
+    box-sizing:border-box;
+    
 }
 
 .columns{
@@ -20,6 +21,7 @@
     justify-content: center;
     align-items: center;
     background-color: #1B4965;
+    font-family: 'Abril Fatface', cursive;
 }
 .columns_right{
     box-sizing: border-box;
@@ -34,7 +36,7 @@
 }
 
 .columns_right button{
-    background-color: #3bc14a;
+    background-color: #1B4965;
     border-radius: 10px;
     color: white;
     border: none;
@@ -42,6 +44,7 @@
     height: 30px;
     padding: 0%;    
     margin: 10px;
+    font-size: 20px;
 }
 
 button:hover{
@@ -61,6 +64,7 @@ button:hover{
     width: 50%;
     height: auto;
     
+    
 }
 
 .carousel_products{
@@ -69,6 +73,7 @@ button:hover{
     text-align: center;
     background-color: #ffffff;
     margin-top: 5vh;
+
 }
 
 .carousel_products h2{
@@ -80,4 +85,19 @@ button:hover{
 
 .carousel-root :nth-child(1){
     background-color: #ffffff;
+}
+
+@media (max-width: 1580px) { 
+    .columns_right button{
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 2000px) {
+    .columns_right button{
+        font-size: 30px;
+    }
+    .aboutUs{
+        font-size: 20px;
+    }
 }
