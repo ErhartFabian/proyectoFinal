@@ -6,26 +6,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home(props) {
 
-    //arreglo que contiene arreglos con los nombres de los articulos
-    /* const [products, setProducts] = useState([]);
-    const [state, setState] = useState('IDLE');
-
-    useEffect(() => {
-    axios.get('https://fakestoreapi.com/products?limit=10')
-    .then(response => {
-        setState('LOADING');
-        var newproducts = [];
-        for (let i = 0; i < response.data.length; i++) {
-            newproducts.push(response.data[i]);
-        }
-        setProducts(newproducts);
-        setState('COMPLETE');
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
-    }, []); */
     
 
     // go to inventory page
@@ -36,10 +16,6 @@ function Home(props) {
     const goToHome = () => {
         window.location.href = "/home";
     }
-
-
-
-    
 
 
     return (

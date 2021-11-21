@@ -5,10 +5,19 @@ import add2Cart from './shopping-cart.png'
 import clock from './loadimg.png';
 import error from './errorimg.png';
 import { Tooltip } from '@mui/material';
-import axios from 'axios';
 
 
 function Inventory(props) {
+
+
+    //funcion para agregar productos al carrito
+    const addToCart = (event) => {
+        const newproduc = props.products[parseInt(event.target.name)-1];
+        var items = [...props.cartCount];
+        items.push(newproduc);
+        props.setCartCount(items);
+        console.log("items:",items);
+    }
 
     
 
@@ -26,11 +35,11 @@ function Inventory(props) {
         //Si el estado está en error, manda la pantalla de error
         return (
             <div id="errorscreen">
-                <img alt="error" src={error} id="errorimg" />
-                <p id="errortxt">HMMM SOMETHING WENT WRONG :( PLEASE RECHARGE</p>
+                <img alt="error" src={error} id="errorimg"/>
+                <p id="errortxt">HMMM SOMETHING WENT WRONG PLEASE RECHARGE</p>
             </div>
         );
-    }
+}
 
     if (props.load === 'complete_st') {
         //Si el estado pasa a completo, imprime los articulos
@@ -44,8 +53,12 @@ function Inventory(props) {
                     <Tooltip title={"Ir al carrito"} arrow>
                         <button id="topcartbtn">
                             <img id="cartIcon" alt="cartIcon" src={cart}></img>
+                             
                         </button>
+                        
+                        
                     </Tooltip>
+                    <h1 id="compName">Cart: {props.cartCount.length} </h1>
                 </div>
 
                 <ul id="artsUl" style={{
@@ -95,8 +108,8 @@ function Inventory(props) {
                                         <p id="artQs">{"Disponibles: " + article.rating.count}</p>
 
                                         <Tooltip title="Agregar al carrito" arrow>
-                                            <button id="addbutton" type="button">
-                                                <img alt="addcart" id="add2cart" src={add2Cart}></img>
+                                            <button id="addbutton" type="button" onClick={addToCart} >
+                                                <img alt="addcart" id="add2cart" src={add2Cart} key={article.id} name={article.id} ></img>
                                             </button>
                                         </Tooltip>
                                     </div>

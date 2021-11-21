@@ -13,6 +13,7 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [load, setLoad] = useState('idle_st'); 
+  const [cartCount, setCartCount] = useState([]);
 
 
     useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
           </Route>
           {/* ruta a  Inventory*/}
           <Route exact path="/inventory">
-            <Inventory products={products} load={load}/>
+            <Inventory products={products} load={load} cartCount={cartCount} setCartCount={setCartCount} />
           </Route>
           {/* ruta para paymenprocess */}
           <Route path="/paymentprocess" component={PaymentProcess} />
