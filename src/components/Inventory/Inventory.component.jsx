@@ -16,10 +16,13 @@ function Inventory(props) {
         var items = [...props.cartCount];
         items.push(newproduc);
         props.setCartCount(items);
+        console.log("cart:",props.cartCount);
         console.log("items:",items);
     }
 
-    
+    const goToCart = () => {
+        window.location.href = "/shoppingcart";
+    }
 
     if (props.load === 'idle_st' || props.load === 'loading_st') {
         //Si el estado de la pagina está en idle o cargando, manda la pantalla de carga
@@ -51,7 +54,7 @@ function Inventory(props) {
                     }}>Eshop</h1>
 
                     <Tooltip title={"Ir al carrito"} arrow>
-                        <button id="topcartbtn">
+                        <button id="topcartbtn" onClick={goToCart}>
                             <img id="cartIcon" alt="cartIcon" src={cart}></img>
                              
                         </button>
