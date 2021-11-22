@@ -7,6 +7,7 @@ import error from './errorimg.png';
 import { Tooltip } from '@mui/material';
 
 
+
 function Inventory(props) {
 
 
@@ -16,7 +17,8 @@ function Inventory(props) {
         var items = [...props.cartCount];
         items.push(newproduc);
         props.setCartCount(items);
-        console.log("cart:",props.cartCount);
+        window.localStorage.setItem("itemsCar", props.cartCount.length+1);
+        console.log("cart:",props.cartCount.length+1);
         console.log("items:",items);
     }
 
@@ -50,7 +52,7 @@ function Inventory(props) {
             <div id="articlesdiv">
                 <div id="topnav">
                     <h1 id="compName" onClick={() => {
-                        props.history.goBack();
+                        props.navigation.goBack();
                     }}>Eshop</h1>
 
                     <Tooltip title={"Ir al carrito"} arrow>
@@ -61,7 +63,7 @@ function Inventory(props) {
                         
                         
                     </Tooltip>
-                    <h1 id="compName">Cart: {props.cartCount.length} </h1>
+                    <h1 id="totalCart">Cart: {localStorage.getItem("itemsCar")} </h1>
                 </div>
 
                 <ul id="artsUl" style={{
