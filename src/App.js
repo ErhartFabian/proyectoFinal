@@ -33,7 +33,7 @@ function App() {
           newproducts.push(response.data[i]);
         }
 
-        for(let i=1; i<newproducts.length; i++){
+        for(let i=0; i<newproducts.length; i++){
           
           newproducts[i].quantity=1;
           console.log("Cantidad:", newproducts[i].quantity);

@@ -10,52 +10,54 @@ import { Tooltip } from '@mui/material';
 
 function Inventory(props) {
 
-    const [items, setItems]= useState([]);
-    const [art, setArt]=useState(items);
+    let items = [...props.cartCount];
+    const [art, setArt] = useState(items);
 
     //funcion para agregar productos al carrito
     const addToCart = (event) => {
 
-        let i=0;
-        while (items[i] !== parseInt(event.target.name)-1) {
-            console.log(items);
-            i++;
-            if(items.length===0){
-                const newproduc = props.products[parseInt(event.target.name) - 1];
-                setItems(items.push(newproduc));
-                props.setCartCount(items);
-                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
-                window.localStorage.setItem("itemsCar", JSON.stringify(items));
+        let i = 0;
+        console.log(items);
+        i++;
+        if (items.length === 0) {
+            const newproduc = props.products[parseInt(event.target.name) - 1];
+            items.push(newproduc);
+            props.setCartCount(items);
+            window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+            window.localStorage.setItem("itemsCar", JSON.stringify(items));
 
-            }
-            //El producto seleccionado se guarda en esta variable
-            
-            // //Arreglo con los productos agregados
-            // var items = [...props.cartCount];
-            //Se le agrega el producto seleccionado
-            // items.push(newproduc);
-            //El arreglo del carro se actualiza
-            // props.setCartCount(items);
-            //Guarda en la memoria la cantidad de items en el carro
-            // window.localStorage.setItem("numberCar", props.cartCount.length + 1);
-            // //Guarda en la memoria los articulos agregados
-            // window.localStorage.setItem("itemsCar", JSON.stringify(items));
-            console.log(items[i], parseInt(event.target.name)-1);
-            if(items[i] ===parseInt(event.target.name)-1 || items.length===1){
-                setArt(art[event.target.name].quantity += 1);
-                props.setCartCount(art);
-                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
-                window.localStorage.setItem("itemsCar", JSON.stringify(art));
-            }
-            else{
-                const newproduc = props.products[parseInt(event.target.name) - 1];
-                setItems(items.push(newproduc));
-                props.setCartCount(items);
-                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
-                window.localStorage.setItem("itemsCar", JSON.stringify(items));
-            }
-            
-        } 
+            console.log(items, parseInt(event.target.name) - 1);
+            console.log("items qunantity", items[i - 1]);
+
+
+        }
+        //El producto seleccionado se guarda en esta variable
+
+        // //Arreglo con los productos agregados
+        // var items = [...props.cartCount];
+        //Se le agrega el producto seleccionado
+        // items.push(newproduc);
+        //El arreglo del carro se actualiza
+        // props.setCartCount(items);
+        //Guarda en la memoria la cantidad de items en el carro
+        // window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+        // //Guarda en la memoria los articulos agregados
+        // window.localStorage.setItem("itemsCar", JSON.stringify(items));
+
+        else if (items[i] === parseInt(event.target.name)) {
+
+            items[i].quantity += 1;
+            props.setCartCount(items);
+            window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+            window.localStorage.setItem("itemsCar", JSON.stringify(items));
+        }
+        else {
+            const newproduc = props.products[parseInt(event.target.name) - 1];
+            items.push(newproduc);
+            props.setCartCount(items);
+            window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+            window.localStorage.setItem("itemsCar", JSON.stringify(items));
+        }
 
     }
 
