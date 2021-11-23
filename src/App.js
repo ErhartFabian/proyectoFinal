@@ -45,13 +45,15 @@ function App() {
             <Home products={products}/>
           </Route>
           {/* ruta a  Inventory*/}
-          <Route exact path="/inventory">
+          <Route path="/inventory">
             <Inventory products={products} load={load} cartCount={cartCount} setCartCount={setCartCount} />
           </Route>
           {/* ruta para paymenprocess */}
-          <Route path="/paymentprocess" component={PaymentProcess} />
+          <Route path="/paymentprocess" component={PaymentProcess}  />
 
-          <Route path="/shoppingcart" component={ShoppingCart} />
+          <Route path="/shoppingcart">
+            <ShoppingCart products={products} cartCount={cartCount} setCartCount={setCartCount} />
+          </Route>
           
           <Route path="/" exact component={Home}></Route>
           

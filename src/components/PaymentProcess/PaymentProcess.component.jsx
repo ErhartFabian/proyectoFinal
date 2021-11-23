@@ -4,6 +4,9 @@ import './paymentProcess.css';
 
 function Checkout() {
 
+    let total = localStorage.getItem("total");
+    console.log(total);
+
     const[state, setState] = useState({
         firstname: "",
         email:"",
@@ -105,7 +108,7 @@ function Checkout() {
           <div className="col-25">
             <div className="container">
               <h4>Cart Total</h4>
-              <p>Total <span className="price" style={{color: "black"}}><b>$30</b></span></p>
+              <p>Total <span className="price" style={{color: "black"}}><b>&#36;{total}</b></span></p>
             </div>
           </div>
         </div>
