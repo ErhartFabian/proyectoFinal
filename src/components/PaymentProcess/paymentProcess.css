@@ -1,23 +1,40 @@
 .main {
-  display: -ms-flexbox; 
   display: flex;
-  -ms-flex-wrap: wrap; 
   flex-wrap: wrap;
   margin: 0 -16px;
 }
 
+#BarraNav{
+    display: flex;
+    flex-direction: row;
+    background-color: #1B4965;
+    height: 9vh;
+    color: #ffffff;
+}
+
+#Name{
+  color:white;
+  background-color: #1B4965;
+  font-family: 'Abril Fatface', cursive;
+}
+
+#Name:hover{
+  color:white;
+  background-color: #4DA167;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
 .col-25 {
-  -ms-flex: 25%; 
   flex: 25%;
 }
 
 .col-50 {
-  -ms-flex: 50%; 
   flex: 50%;
 }
 
 .col-75 {
-  -ms-flex: 75%; 
   flex: 75%;
 }
 
