@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './paymentProcess.css';
-
+import { Tooltip } from '@mui/material';
+import cart from '../Inventory/cart.png';
 
 function Checkout() {
 
@@ -51,12 +52,23 @@ function Checkout() {
         });
     }
 
+    const goToHome = () => {
+        window.location.href = "/home";
+    }
+
+    const goToCart = () => {
+        window.location.href = "/shoppingcart";
+    }
+
   return (
     <div className="App">
         <div id="BarraNav">
-            <h1 id="Name" onClick={() => {
-                props.history.goBack();
-            }}>Eshop</h1>
+            <h1 id="Name" onClick={goToHome}>Eshop</h1>
+            <Tooltip title={"Ir al carrito"} arrow>
+                <button id="topcartbtn" onClick={goToCart}>
+                    <img id="cartIcon" alt="cartIcon" src={cart}></img>     
+                </button>            
+            </Tooltip>
         </div>
         <div className="main">
             <div className="col-75">
