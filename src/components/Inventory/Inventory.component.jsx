@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './inventory.css';
 import cart from './cart.png';
 import add2Cart from './shopping-cart.png'
@@ -10,26 +10,53 @@ import { Tooltip } from '@mui/material';
 
 function Inventory(props) {
 
+    const [items, setItems]= useState([]);
+    const [art, setArt]=useState(items);
 
     //funcion para agregar productos al carrito
     const addToCart = (event) => {
-        //El producto seleccionado se guarda en esta variable
-        const newproduc = props.products[parseInt(event.target.name) - 1];
-        //Arregl con los productos agregados
-        var items = [...props.cartCount];
-        //Se le agrega el producto seleccionado
-        items.push(newproduc);
-        //El arreglo del carro se actualiza
-        props.setCartCount(items);
-        //agregar propiedad quantity a cada producto
-        newproduc.quantity = 1;
-        //Guarda en la memoria la cantidad de items en el carro
-        window.localStorage.setItem("numberCar", props.cartCount.length + 1);
-        //Guarda en la memoria los articulos agregados
-        window.localStorage.setItem("itemsCar", JSON.stringify(items));
 
-        console.log("cart:", props.cartCount.length);
-        console.log("items:", items);
+        let i=0;
+        while (items[i] !== parseInt(event.target.name)-1) {
+            console.log(items);
+            i++;
+            if(items.length===0){
+                const newproduc = props.products[parseInt(event.target.name) - 1];
+                setItems(items.push(newproduc));
+                props.setCartCount(items);
+                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+                window.localStorage.setItem("itemsCar", JSON.stringify(items));
+
+            }
+            //El producto seleccionado se guarda en esta variable
+            
+            // //Arreglo con los productos agregados
+            // var items = [...props.cartCount];
+            //Se le agrega el producto seleccionado
+            // items.push(newproduc);
+            //El arreglo del carro se actualiza
+            // props.setCartCount(items);
+            //Guarda en la memoria la cantidad de items en el carro
+            // window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+            // //Guarda en la memoria los articulos agregados
+            // window.localStorage.setItem("itemsCar", JSON.stringify(items));
+            console.log(items[i], parseInt(event.target.name)-1);
+            if(items[i] ===parseInt(event.target.name)-1 || items.length===1){
+                setArt(art[event.target.name].quantity += 1);
+                props.setCartCount(art);
+                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+                window.localStorage.setItem("itemsCar", JSON.stringify(art));
+            }
+            else{
+                const newproduc = props.products[parseInt(event.target.name) - 1];
+                setItems(items.push(newproduc));
+                props.setCartCount(items);
+                window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+                window.localStorage.setItem("itemsCar", JSON.stringify(items));
+            }
+            
+        } 
+
     }
 
     //Manda al usuario al carrito
@@ -125,7 +152,7 @@ function Inventory(props) {
                                         <p id="artQs">{"Available: " + article.rating.count}</p>
 
                                         <Tooltip title="Add to cart" arrow>
-                                            <button id="addbutton" type="button" onClick={addToCart} >
+                                            <button id="addbutton" type="button" onClick={addToCart} name={article.id}>
                                                 <img alt="addcart"
                                                     id="add2cart"
                                                     src={add2Cart}

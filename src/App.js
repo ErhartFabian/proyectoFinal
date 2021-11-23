@@ -32,6 +32,12 @@ function App() {
         for (let i = 0; i < response.data.length; i++) {
           newproducts.push(response.data[i]);
         }
+
+        for(let i=1; i<newproducts.length; i++){
+          
+          newproducts[i].quantity=1;
+          console.log("Cantidad:", newproducts[i].quantity);
+        }
         //Asigna los productos al estado
         setProducts(newproducts);
         //La carga pasa a COMPLETE
