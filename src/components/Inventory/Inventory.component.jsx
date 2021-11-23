@@ -21,6 +21,8 @@ function Inventory(props) {
         items.push(newproduc);
         //El arreglo del carro se actualiza
         props.setCartCount(items);
+        //agregar propiedad quantity a cada producto
+        newproduc.quantity = 1;
         //Guarda en la memoria la cantidad de items en el carro
         window.localStorage.setItem("numberCar", props.cartCount.length + 1);
         //Guarda en la memoria los articulos agregados

@@ -82,6 +82,13 @@
     flex: 60%;
     max-width: 60%;
 }
+.quantity{
+    flex: 16.6666666667%;
+    max-width: 16.6666666667%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
 .item-add-delete{
     display: flex;
     flex: 23.3333333333%;
