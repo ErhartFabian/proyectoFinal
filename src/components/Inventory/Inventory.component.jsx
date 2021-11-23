@@ -13,27 +13,34 @@ function Inventory(props) {
 
     //funcion para agregar productos al carrito
     const addToCart = (event) => {
-        const newproduc = props.products[parseInt(event.target.name)-1];
+        //El producto seleccionado se guarda en esta variable
+        const newproduc = props.products[parseInt(event.target.name) - 1];
+        //Arregl con los productos agregados
         var items = [...props.cartCount];
+        //Se le agrega el producto seleccionado
         items.push(newproduc);
+        //El arreglo del carro se actualiza
         props.setCartCount(items);
-        window.localStorage.setItem("numberCar", props.cartCount.length+1);
+        //Guarda en la memoria la cantidad de items en el carro
+        window.localStorage.setItem("numberCar", props.cartCount.length + 1);
+        //Guarda en la memoria los articulos agregados
         window.localStorage.setItem("itemsCar", JSON.stringify(items));
 
-        console.log("cart:",props.cartCount.length);
-        console.log("items:",items);
+        console.log("cart:", props.cartCount.length);
+        console.log("items:", items);
     }
 
+    //Manda al usuario al carrito
     const goToCart = () => {
         window.location.href = "/shoppingcart";
     }
-
+    //Manda al usuario a Home
     const goToHome = () => {
         window.location.href = "/home";
     }
 
+    //Si el estado de la pagina está en idle o cargando, manda la pantalla de carga
     if (props.load === 'idle_st' || props.load === 'loading_st') {
-        //Si el estado de la pagina está en idle o cargando, manda la pantalla de carga
         return (
             <div id="loadscreen">
                 <img alt="clock" src={clock} id="clock" />
@@ -42,31 +49,30 @@ function Inventory(props) {
         );
     }
 
+    //Si el estado está en error, manda la pantalla de error
     if (props.load === 'error_st') {
-        //Si el estado está en error, manda la pantalla de error
         return (
             <div id="errorscreen">
-                <img alt="error" src={error} id="errorimg"/>
+                <img alt="error" src={error} id="errorimg" />
                 <p id="errortxt">HMMM SOMETHING WENT WRONG PLEASE RECHARGE</p>
             </div>
         );
-}
+    }
 
+    //Si el estado pasa a completo, imprime los articulos
     if (props.load === 'complete_st') {
-        //Si el estado pasa a completo, imprime los articulos
         return (
             <div id="articlesdiv">
                 <div id="topnav">
                     <h1 id="compName" onClick={goToHome}>Eshop</h1>
 
-                    <Tooltip title={"Ir al carrito"} arrow>
+                    <Tooltip title={"Go to cart"} arrow>
                         <button id="topcartbtn" onClick={goToCart}>
                             <img id="cartIcon" alt="cartIcon" src={cart}></img>
-                             
+
                         </button>
-                        
-                        
                     </Tooltip>
+
                     <h1 id="totalCart">Cart: {localStorage.getItem("numberCar")} </h1>
                 </div>
 
@@ -84,7 +90,7 @@ function Inventory(props) {
 
                             <div className="App" key={article.title}>
 
-                                 <div id="artTable" key={article.title}>
+                                <div id="artTable" key={article.title}>
                                     <div id="artSquare"
                                         className="artTabs"
                                         type="button"
@@ -113,17 +119,23 @@ function Inventory(props) {
 
                                         <p id="artName">{article.title}</p>
                                         <p id="artP">{"$" + article.price}</p>
-                                        <p id="artR">{"Valoración: " + article.rating.rate + " de 5"}</p>
-                                        <p id="artQs">{"Disponibles: " + article.rating.count}</p>
+                                        <p id="artR">{"Rate: " + article.rating.rate + " de 5"}</p>
+                                        <p id="artQs">{"Available: " + article.rating.count}</p>
 
-                                        <Tooltip title="Agregar al carrito" arrow>
+                                        <Tooltip title="Add to cart" arrow>
                                             <button id="addbutton" type="button" onClick={addToCart} >
-                                                <img alt="addcart" id="add2cart" src={add2Cart} key={article.id} name={article.id} ></img>
+                                                <img alt="addcart"
+                                                    id="add2cart"
+                                                    src={add2Cart}
+                                                    key={article.id}
+                                                    name={article.id}>
+                                                </img>
                                             </button>
                                         </Tooltip>
+
                                     </div>
 
-                                </div> 
+                                </div>
                             </div>
                         )
 

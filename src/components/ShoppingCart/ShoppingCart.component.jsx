@@ -13,7 +13,7 @@ function ShoppingCart(props) {
     for(let i=0; i<aux.length; i++){
         total += aux[i].price;
     }
-    window.localStorage.setItem("total", total);
+    window.localStorage.setItem("total", parseFloat(total).toFixed(2));
 
     const goToInventory = () => {
         window.location.href = "/inventory";
@@ -103,7 +103,7 @@ function ShoppingCart(props) {
                     <p>Total items</p>
                     <h4>{aux.length}</h4>
                     <p>Total payment</p>
-                    <h4>&#36;{total}</h4>
+                    <h4>&#36;{parseFloat(total).toFixed(2)}</h4>
                     <div className="checkout">
                         <button onClick={goToPaymentProcess} >Checkout</button>
                         <button onClick={clearCart} >Cancel</button>
