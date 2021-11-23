@@ -17,13 +17,19 @@ function Inventory(props) {
         var items = [...props.cartCount];
         items.push(newproduc);
         props.setCartCount(items);
-        window.localStorage.setItem("itemsCar", props.cartCount.length+1);
-        console.log("cart:",props.cartCount.length+1);
+        window.localStorage.setItem("numberCar", props.cartCount.length+1);
+        window.localStorage.setItem("itemsCar", JSON.stringify(items));
+
+        console.log("cart:",props.cartCount.length);
         console.log("items:",items);
     }
 
     const goToCart = () => {
         window.location.href = "/shoppingcart";
+    }
+
+    const goToHome = () => {
+        window.location.href = "/home";
     }
 
     if (props.load === 'idle_st' || props.load === 'loading_st') {
@@ -51,9 +57,7 @@ function Inventory(props) {
         return (
             <div id="articlesdiv">
                 <div id="topnav">
-                    <h1 id="compName" onClick={() => {
-                        props.navigation.goBack();
-                    }}>Eshop</h1>
+                    <h1 id="compName" onClick={goToHome}>Eshop</h1>
 
                     <Tooltip title={"Ir al carrito"} arrow>
                         <button id="topcartbtn" onClick={goToCart}>
@@ -63,7 +67,7 @@ function Inventory(props) {
                         
                         
                     </Tooltip>
-                    <h1 id="totalCart">Cart: {localStorage.getItem("itemsCar")} </h1>
+                    <h1 id="totalCart">Cart: {localStorage.getItem("numberCar")} </h1>
                 </div>
 
                 <ul id="artsUl" style={{
