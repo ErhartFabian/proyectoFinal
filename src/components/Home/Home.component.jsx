@@ -44,7 +44,7 @@ function Home(props) {
                 <div className="carousel_products">
                     <h2>Best Seller</h2>
 
-                    <Carousel products={props.products} />
+                    {/* <Carousel products={props.products} /> */}
                   
 
                 </div>
