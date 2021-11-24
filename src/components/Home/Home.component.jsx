@@ -1,6 +1,5 @@
 import React from "react";
 import './home.css';
-import Carousel from "./Carousel.component.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
