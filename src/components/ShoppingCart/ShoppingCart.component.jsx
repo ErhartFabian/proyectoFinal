@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './ShoppingCart.css';
 
 
@@ -6,7 +6,7 @@ import './ShoppingCart.css';
 function ShoppingCart(props) {
 
     let aux1 = JSON.parse(localStorage.getItem("itemsCar"));
-    const [aux, setAux] = useState(aux1);
+    const aux=aux1;
     let total = 0;
     //sumar todos los precios de los articulos
     for (let i = 0; i < aux.length; i++) {
