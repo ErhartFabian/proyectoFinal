@@ -10,6 +10,5 @@ Se muestran los artículos guardados desde Inventory, además de la cantidad y e
 Muestra un formulario con los datos que el usuario debe llenar al igual que la cantidad a pagar.
 
 # Demostración
-![] (demo_proyecto.gif)
-
+![Demo Eshop](demo/demo_proyecto.gif)
 
