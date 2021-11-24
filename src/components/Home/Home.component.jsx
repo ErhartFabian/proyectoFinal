@@ -31,9 +31,6 @@ function Home(props) {
                     <button className="column" onClick={goToInventory} >
                         Inventory
                     </button>
-                    <button className="column" onClick={goToInventory} >
-                        About us
-                    </button>
 
                 </div>
             </div>
