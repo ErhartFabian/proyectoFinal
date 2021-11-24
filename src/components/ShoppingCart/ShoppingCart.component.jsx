@@ -7,7 +7,6 @@ function ShoppingCart(props) {
 
     let aux1 = JSON.parse(localStorage.getItem("itemsCar"));
     const [aux, setAux] = useState(aux1);
-    console.log(aux);
     let total = 0;
     //sumar todos los precios de los articulos
     for (let i = 0; i < aux.length; i++) {
@@ -35,49 +34,40 @@ function ShoppingCart(props) {
         window.localStorage.setItem("itemsCar", JSON.stringify([]));
     }
 
+    //Faltó implementar :(
     //añadir articulo actual al carrito
-    const addToCart = (event) => {
-        /* const newproduc = props.products[parseInt(event.target.name)-1]; */
-        /* console.log("nuevo proudcto:",newproduc); */
-        var items = [...aux];
-        /* items.push(newproduc); */
-        /* props.setCartCount(items); */
-        console.log(event.target);
-        for (let i = 0; i < items.length; i++) {
-            console.log("id", items[i].id);
-            console.log("name", event.target.name);
-            if (items[i].id === parseInt(event.target.name)) {
-                items[i].quantity += 1;
-                total += aux[i].price;
-            }
-        }
-        setAux(items);
+    // const addToCart = (event) => {
 
-        /* window.localStorage.setItem("numberCar", props.cartCount.length+1);
-        window.localStorage.setItem("itemsCar", JSON.stringify(items)); */
+    //     var items = [...aux];
 
-    }
-    //eliminar articulo actual del carrito
-    const removeFromCart = (event) => {
-        /*  var items = [...aux];
-         items.splice(parseInt(event.target.name)-1, 1);
-         props.setCartCount(items);
-         window.localStorage.setItem("numberCar", props.cartCount.length+1);
-         window.localStorage.setItem("itemsCar", JSON.stringify(items)); */
-        var items = [...aux];
-        /* items.push(newproduc); */
-        /* props.setCartCount(items); */
-        console.log(event.target);
-        for (let i = 0; i < items.length; i++) {
-            console.log("id", items[i].id);
-            console.log("name", event.target.name);
-            if (items[i].id === parseInt(event.target.name)) {
-                items[i].quantity -= 1;
-                total -= aux[i].price;
-            }
-        }
-        setAux(items);
-    }
+    //     console.log(event.target);
+    //     for (let i = 0; i < items.length; i++) {
+    //         if (items[i].id === parseInt(event.target.name)) {
+    //             items[i].quantity += 1;
+    //             total += aux[i].price;
+    //         }
+    //     }
+    //     setAux(items);
+
+    // }
+
+    //eliminar articulo actual del carrito. No funcionó :(
+
+    // const removeFromCart = (event) => {
+
+    //     var items = [...aux];
+
+    //     console.log(event.target);
+    //     for (let i = 0; i < items.length; i++) {
+    //         console.log("id", items[i].id);
+    //         console.log("name", event.target.name);
+    //         if (items[i].id === parseInt(event.target.name)) {
+    //             items[i].quantity -= 1;
+    //             total -= aux[i].price;
+    //         }
+    //     }
+    //     setAux(items);
+    // }
 
     return (
         <div className="shoppingCart">
@@ -105,27 +95,24 @@ function ShoppingCart(props) {
                     {
 
                         aux.map((item) => {
-                            console.log(item.id);
-                            if (item.id === item.id) {
-                                return (
-                                    <div className="item" key={item.id}>
-                                        <div className="item-img">
-                                            <img src={item.image} alt="" height="100px"></img>
-                                        </div>
-                                        <div className="item-info">
-                                            <h4>{item.title}</h4>
-                                            <h4>&#36;{item.price}</h4>
-                                        </div>
-                                        <div className="quantity">
-                                            <p>Quantity: {item.quantity}</p>
-                                        </div>
-                                        <div className="item-add-delete">
-                                            <button onClick={addToCart} name={item.id}><b>+</b></button>
-                                            <button onClick={removeFromCart} name={item.id} >-</button>
-                                        </div>
+                            return (
+                                <div className="item" key={item.id}>
+                                    <div className="item-img">
+                                        <img src={item.image} alt="" height="100px"></img>
                                     </div>
-                                )
-                            }
+                                    <div className="item-info">
+                                        <h4>{item.title}</h4>
+                                        <h4>&#36;{item.price}</h4>
+                                    </div>
+                                    <div className="quantity">
+                                        <p>Quantity: {item.quantity}</p>
+                                    </div>
+                                    <div className="item-add-delete">
+                                        <button name={item.id}><b>+</b></button>
+                                        <button name={item.id} >-</button>
+                                    </div>
+                                </div>
+                            )
                         })
                     }
                 </div>
